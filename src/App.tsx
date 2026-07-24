@@ -11,7 +11,8 @@ import { FAQSection } from './components/FAQSection';
 import { CartDrawer } from './components/CartDrawer';
 import { Footer } from './components/Footer';
 import { CartItem, ProductPack } from './types';
-
+import { StorageInfo } from "./components/StorageInfo";
+import { ComingSoon } from "./components/comingsoon";
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
@@ -88,8 +89,14 @@ export default function App() {
         <HealthBenefits />
         <HowToUse />
         <ShopSection onAddToCart={handleAddToCart} />
+
+        <ComingSoon />
+
         <Testimonials />
+
         <FAQSection />
+
+        <StorageInfo />
       </main>
 
       {/* Cart Drawer */}

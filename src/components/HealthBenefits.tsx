@@ -178,7 +178,7 @@ export const HealthBenefits: React.FC = () => {
                   : 'text-neutral-700 hover:text-neutral-900'
               }`}
             >
-              Kids (2 - 12)
+              Kids (3 – 12)
             </button>
             <button
               onClick={() => setSelectedAge('adults')}

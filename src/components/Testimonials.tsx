@@ -330,7 +330,7 @@ export const Testimonials: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-neutral-900">No Customer Reviews Yet</h3>
               <p className="text-sm text-neutral-600 max-w-md mx-auto">
-                We have removed pre-filled template reviews to ensure 100% honesty. Be the very first customer to submit a rating and share your genuine product experience!
+                Be the very first customer to submit a rating and share your genuine product experience!
               </p>
               <button
                 onClick={() => setShowForm(true)}
@@ -401,7 +401,7 @@ export const Testimonials: React.FC = () => {
             <div className="text-xs text-neutral-500 mt-1">Authentic & Verified</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-bold text-neutral-900 font-sans">12+</div>
+            <div className="text-3xl sm:text-4xl font-bold text-neutral-900 font-sans">11+</div>
             <div className="text-xs text-neutral-500 mt-1">Raw Super Ingredients</div>
           </div>
           <div>

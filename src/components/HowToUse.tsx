@@ -1,5 +1,6 @@
 import React from 'react';
 import { Milk, Sparkles, Smile, CupSoda } from 'lucide-react';
+import { ChefHat } from "lucide-react";
 
 export const HowToUse: React.FC = () => {
   const steps = [
@@ -16,10 +17,10 @@ export const HowToUse: React.FC = () => {
       icon: Milk
     },
     {
-      num: '03',
-      title: 'Relish & Energize',
-      desc: 'Stir well for 15 seconds. Relish the rich natural cardamom aroma and enjoy sustained clean stamina!',
-      icon: Smile
+      num: "03",
+      title: "Healthy Nutrimix Laddoos",
+      desc: "Mix Siriswada Nutrimix with warm ghee and jaggery. Roll into bite-sized laddoos and enjoy a delicious homemade snack packed with natural nutrition.",
+      icon: ChefHat
     }
   ];
 
@@ -69,7 +70,7 @@ export const HowToUse: React.FC = () => {
 
                 <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center gap-2 text-xs text-amber-900 font-medium">
                   <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                  <span>Instant Dissolve Blend</span>
+                  <span>Traditional Healthy Snack</span>
                 </div>
               </div>
             );
@@ -82,7 +83,7 @@ export const HowToUse: React.FC = () => {
             Pro Tip for Busy Mornings
           </span>
           <p className="text-sm text-neutral-700 leading-relaxed">
-            Mix with cold almond milk and a drop of honey, or sprinkle over fresh fruit bowls & chia puddings for an instant crunch!
+            Mix with warm milk, porridge or smoothies for a quick and nutritious meal any time of the day.
           </p>
         </div>
 

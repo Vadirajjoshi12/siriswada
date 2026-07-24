@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PRODUCT_PACKS } from '../data/productData';
 import { ProductPack } from '../types';
-import jarPackImg from '../assets/images/siriswada_jar_pack_1784833318192.jpg';
+import productImage from '../assets/images/product.png';
 import { ShoppingBag, MessageCircle, Check, Sparkles, Truck, ShieldCheck, Star } from 'lucide-react';
 
 interface ShopSectionProps {
@@ -9,10 +9,9 @@ interface ShopSectionProps {
 }
 
 export const ShopSection: React.FC<ShopSectionProps> = ({ onAddToCart }) => {
-  const [quantities, setQuantities] = useState<Record<string, number>>({
-    'pack-250g': 1,
-    'pack-500g': 1,
-    'pack-1000g': 1
+  const [quantities, setQuantities] = useState({
+    'pack-50g':1,
+    'pack-250g':1
   });
 
   const handleQuantityChange = (packId: string, delta: number) => {
@@ -44,7 +43,7 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ onAddToCart }) => {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium text-neutral-700">
           <div className="flex items-center gap-1.5">
             <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-            <span>4.9/5 Rated by 2,400+ Families</span>
+            <span>4.9/5 Rated by 20+ Families</span>
           </div>
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
@@ -57,7 +56,7 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ onAddToCart }) => {
         </div>
 
         {/* Product Cards Container */}
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-10 gap-8 items-stretch">
           {PRODUCT_PACKS.map((pack) => {
             const qty = quantities[pack.id] || 1;
             const isPopular = pack.isPopular;
@@ -65,7 +64,7 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ onAddToCart }) => {
             return (
               <div
                 key={pack.id}
-                className={`relative rounded-3xl bg-white p-7 border transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl ${
+                className={`relative rounded-3xl bg-gradient-to-b from-amber-50 via-white to-amber-50 p-7 border transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl ${
                   isPopular 
                     ? 'border-amber-500 ring-2 ring-amber-500/20 shadow-lg scale-102 z-10' 
                     : 'border-neutral-200/90 hover:border-amber-300'
@@ -81,26 +80,36 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ onAddToCart }) => {
 
                 <div>
                   {/* Jar Preview Image */}
-                  <div className="h-44 rounded-2xl bg-stone-100 overflow-hidden mb-6 relative group">
-                    <img
-                      src={jarPackImg}
-                      alt={pack.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                    <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-neutral-900/80 backdrop-blur-md text-white text-xs font-bold">
-                      {pack.size}
-                    </span>
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-bold uppercase">
-                      100% Pure Veg
-                    </span>
-                  </div>
+                 {/* Product Image */}
+                {/* Product Image */}
+              <div className="relative bg-gradient-to-b from-amber-50 to-white rounded-3xl border border-amber-100 p-6 mb-8 flex justify-center items-center">
+
+                <img
+                  src={productImage}
+                  alt={pack.name}
+                  className="h-[340px] object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-xl"
+                  referrerPolicy="no-referrer"
+                />
+
+                {/* Veg Badge */}
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-bold shadow-sm">
+                  🌱 100% Pure Veg
+                </div>
+
+                {/* Size Badge */}
+                <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-neutral-900 text-white text-sm font-bold shadow-lg">
+                  {pack.size}
+                </div>
+
+                </div>
 
                   {/* Pack Title & Size */}
-                  <div className="space-y-1">
+                  <div className="space-y-2 text-center">
+                    {pack.savings && (
                     <span className="text-xs font-bold uppercase tracking-wider text-amber-800">
                       {pack.savings}
                     </span>
+)}
                     <h3 className="text-2xl font-semibold text-neutral-900 tracking-tight font-sans">
                       {pack.name}
                     </h3>
@@ -110,22 +119,26 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ onAddToCart }) => {
                   </div>
 
                   {/* Price */}
-                  <div className="mt-5 flex items-baseline gap-2">
+                 <div className="mt-5 flex justify-center items-center gap-2 flex-wrap">
                     <span className="text-3xl font-bold text-neutral-900 font-sans">
                       ₹{pack.price}
                     </span>
-                    <span className="text-sm text-neutral-400 line-through">
-                      ₹{pack.originalPrice}
-                    </span>
+
+                    {pack.originalPrice > pack.price && (
+                      <span className="text-sm text-neutral-400 line-through">
+                        ₹{pack.originalPrice}
+                      </span>
+                    )}
+
                     <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
                       Inclusive of all taxes
                     </span>
                   </div>
 
                   {/* Feature Checklist */}
-                  <ul className="mt-6 space-y-2.5 border-t border-neutral-100 pt-5">
+                  <ul className="mt-6 space-y-3 border-t border-neutral-100 pt-5">
                     {pack.features.map((feat, i) => (
-                      <li key={i} className="flex items-center gap-2 text-xs text-neutral-700">
+                      <li key={i} className="flex items-center justify-center gap-2 text-sm text-neutral-700">
                         <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                         <span>{feat}</span>
                       </li>

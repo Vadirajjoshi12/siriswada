@@ -10,7 +10,7 @@ import greenCardamomImg from '../assets/images/ingredient_green_cardamom.jpg';
 import basilSeedsImg from '../assets/images/ingredient_basil_seeds.webp';
 import watermelonSeedsImg from '../assets/images/ingredient_watermelon_seeds.webp';
 import flaxseedsImg from '../assets/images/ingredients_flax_seeds.jpg';
-
+import productImage from '../assets/images/product.png';
 export const INGREDIENTS: Ingredient[] = [
   // NUTS
   {
@@ -153,49 +153,33 @@ export const INGREDIENTS: Ingredient[] = [
 
 export const PRODUCT_PACKS: ProductPack[] = [
   {
-    id: 'pack-250g',
+    id: 'pack-50g',
     name: 'Nutrimix Starter Pack',
-    size: '250 grams',
-    price: 299,
-    originalPrice: 399,
-    savings: 'Save ₹100 (25% OFF)',
-    description: 'Perfect for first-time tasters. Lasts ~12-15 servings for a single person.',
+    size: '50 grams',
+    price: 99,
+    originalPrice: 99,
+    description: 'Perfect for first-time users.',
     features: [
-      '100% Pure Nuts & Superseeds',
-      'Zero Added Refined Sugar',
+      '11+ Super Ingredients',
+      'Zero Added Sugar',
       'Chemical & Preservative Free',
-      'Airtight Resealable Pouch'
+      '4 Months Shelf Life'
     ]
   },
+
   {
-    id: 'pack-500g',
+    id: 'pack-250g',
     name: 'Nutrimix Family Pack',
-    size: '500 grams',
-    price: 549,
-    originalPrice: 749,
+    size: '250 grams',
+    price: 495,
+    originalPrice: 495,
     isPopular: true,
-    savings: 'Save ₹200 (27% OFF)',
-    description: 'Our most loved family pack. Keeps parents, kids, and elders energized all month long.',
+    description: 'Perfect for the whole family.',
     features: [
-      'Best Value for Daily Family Scoop',
-      'Includes 12+ Super Nuts & Seeds',
-      'Free Express Delivery',
-      'Airtight Eco-Glass Storage Jar'
-    ]
-  },
-  {
-    id: 'pack-1000g',
-    name: 'Nutrimix Super Saver Pack',
-    size: '1000 grams (1 KG)',
-    price: 999,
-    originalPrice: 1399,
-    savings: 'Save ₹400 (29% OFF)',
-    description: 'Maximum savings for fitness enthusiasts and large families.',
-    features: [
-      'Maximum Savings Per Gram',
-      'Free Express Home Delivery',
-      'Bonus Healthy Recipe E-Booklet',
-      'Priority Customer Support'
+      '11+ Super Ingredients',
+      'Free Shipping till August 20th',
+      '4 Months Shelf Life',
+      'Suitable for 3 Years & Above'
     ]
   }
 ];
@@ -210,8 +194,8 @@ export const FAQS: FAQItem[] = [
   },
   {
     category: 'Product & Quality',
-    question: 'Is it suitable for toddlers and young children?',
-    answer: 'Yes! Siriswada Nutrimix is formulated for complete family nutrition across all ages. For young toddlers (under 2 years), start with half a teaspoon in warm milk or porridge.'
+    question: 'Is it suitable for children?',
+    answer: 'Yes! Siriswada Nutrimix is suitable for children aged 3 years and above. Start with a small quantity mixed in warm milk or porridge and gradually increase the serving.'
   },
   {
     category: 'Usage & Preparation',
@@ -226,6 +210,6 @@ export const FAQS: FAQItem[] = [
   {
     category: 'Storage & Shelf Life',
     question: 'What is the shelf life and storage instructions?',
-    answer: 'Siriswada Nutrimix stays fresh for 6 months from the date of manufacture. Store in a cool, dry place inside an airtight container or seal our resealable pouch tightly after every use.'
+    answer: 'Siriswada Nutrimix stays fresh for 4 months from the date of manufacture. Store in a cool, dry place inside an airtight container or seal our resealable pouch tightly after every use.'
   }
 ];

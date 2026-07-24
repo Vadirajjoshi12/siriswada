@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShoppingBag, Phone, Sparkles } from 'lucide-react';
+import logo from '../assets/images/logo.png';
 
 interface NavbarProps {
   cartCount: number;
@@ -9,11 +10,11 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ cartCount, onOpenCart, onNavigate }) => {
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/85 border-b border-neutral-200/60 transition-all duration-300">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#F8F1E7]/95 border-b border-[#D8C4A5]">
       {/* Top Banner Notice */}
       <div className="bg-neutral-900 text-amber-100 text-xs py-1.5 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2">
         <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-        <span>Fresh Batch Handcrafted Daily • Free Shipping on Family Packs</span>
+        <span>🚚 Free Shipping till August 20th</span>
         <a 
           href="tel:9148256469" 
           className="hidden md:inline-span ml-2 underline underline-offset-2 text-amber-300 hover:text-white"
@@ -28,9 +29,11 @@ export const Navbar: React.FC<NavbarProps> = ({ cartCount, onOpenCart, onNavigat
           onClick={() => onNavigate('hero')}
           className="flex items-center gap-3 group text-left cursor-pointer focus:outline-none"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-800 to-stone-900 text-amber-200 flex items-center justify-center font-serif text-lg font-bold shadow-sm group-hover:scale-105 transition-transform">
-            SS
-          </div>
+          <img
+              src={logo}
+              alt="Siriswada Foods"
+              className="h-12 w-12 object-contain rounded-lg"
+          />
           <div>
             <div className="font-semibold tracking-tight text-neutral-900 text-base leading-tight font-sans">
               SIRISWADA FOODS
@@ -53,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ cartCount, onOpenCart, onNavigat
             onClick={() => onNavigate('ingredients')}
             className="hover:text-neutral-900 transition-colors cursor-pointer"
           >
-            12 Super Ingredients
+            11 Super Ingredients
           </button>
           <button 
             onClick={() => onNavigate('benefits')}
