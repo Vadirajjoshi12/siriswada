@@ -230,7 +230,7 @@ export const Testimonials: React.FC = () => {
                       type="text"
                       value={roleLocation}
                       onChange={(e) => setRoleLocation(e.target.value)}
-                      placeholder="e.g. Father of two, Bengaluru"
+                      placeholder="e.g. Bengaluru"
                       className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-neutral-900 focus:outline-hidden text-sm"
                     />
                   </div>
