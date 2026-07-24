@@ -1,0 +1,6 @@
+{
+  "name": "Siriswada Foods - Nutrimix",
+  "description": "Premium Nut & Superseed Energy Blend landing page featuring Apple-style aesthetic, shop, and interactive ingredient breakdown.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
