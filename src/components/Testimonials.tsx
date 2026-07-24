@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Star, ShieldCheck, MessageSquarePlus, CheckCircle2, User, Sparkles } from 'lucide-react';
+import { db } from "../firebase";
+
+import {
+collection,
+addDoc,
+getDocs,
+orderBy,
+query
+} from "firebase/firestore";
 
 export interface UserReview {
   id: string;
@@ -12,7 +21,6 @@ export interface UserReview {
   date: string;
 }
 
-const LOCAL_STORAGE_KEY = 'siriswada_customer_reviews_v1';
 
 export const Testimonials: React.FC = () => {
   const [reviews, setReviews] = useState<UserReview[]>([]);
@@ -31,21 +39,35 @@ export const Testimonials: React.FC = () => {
 
   // Load reviews from local storage on initial mount
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (saved) {
-        setReviews(JSON.parse(saved));
-      }
-    } catch (e) {
-      console.error('Failed to load reviews from localStorage', e);
-    }
-  }, []);
+
+const loadReviews = async () => {
+
+const q = query(
+collection(db,"reviews"),
+orderBy("timestamp","desc")
+);
+
+const snapshot = await getDocs(q);
+
+const data = snapshot.docs.map(doc => ({
+id: doc.id,
+...doc.data()
+})) as UserReview[];
+
+setReviews(data);
+
+};
+
+loadReviews();
+
+}, []);
+
 
   const handleRatingClick = (num: number) => {
     setRating(num);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !comment.trim()) return;
 
@@ -64,13 +86,27 @@ export const Testimonials: React.FC = () => {
       })
     };
 
-    const updated = [newReview, ...reviews];
-    setReviews(updated);
-    try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated));
-    } catch (err) {
-      console.error('Failed to save review to localStorage', err);
-    }
+   await addDoc(collection(db,"reviews"),{
+
+   name:newReview.name,
+
+   roleLocation:newReview.roleLocation,
+
+   rating:newReview.rating,
+
+   comment:newReview.comment,
+
+   tag:newReview.tag,
+
+   verified:newReview.verified,
+
+   date:newReview.date,
+
+   timestamp:Date.now()
+
+});
+
+setReviews([newReview,...reviews]);
 
     // Reset form
     setName('');
