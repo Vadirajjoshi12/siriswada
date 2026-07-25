@@ -1,6 +1,5 @@
 import React from 'react';
-import instagramQrImg from '../assets/images/siriswada_jar_pack_1784833318192.jpg';
-import { Phone, Instagram, MapPin, Mail, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Instagram, MapPin, ShieldCheck } from 'lucide-react';
 import logo from "../assets/images/logo.png";
 
 export const Footer: React.FC = () => {
@@ -8,7 +7,7 @@ export const Footer: React.FC = () => {
     <footer className="bg-neutral-950 text-neutral-300 pt-16 pb-12 border-t border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-neutral-800">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-neutral-800">
           
           {/* Col 1: Brand Info */}
           <div className="space-y-4 md:col-span-1">
@@ -88,28 +87,8 @@ export const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-
-          {/* Col 4: Instagram QR Scan Box */}
-          <div className="p-5 rounded-2xl bg-neutral-900 border border-neutral-800 space-y-3 text-center">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 uppercase tracking-wider">
-              <Instagram className="w-4 h-4" />
-              <span>Follow Us On Instagram</span>
-            </div>
-            
-            {/* Simulated QR Code Badge */}
-            <div className="p-3 bg-white rounded-xl max-w-[150px] mx-auto shadow-md">
-              <div className="w-full aspect-square bg-amber-50 border-2 border-amber-600 rounded-lg p-2 flex flex-col items-center justify-center text-center">
-                <Instagram className="w-8 h-8 text-amber-700" />
-                <span className="text-[9px] font-bold text-amber-900 mt-1 uppercase">Scan QR Code</span>
-              </div>
-            </div>
-
-            <p className="text-[11px] font-semibold text-amber-400">
-              @SIRISWADA_FOODS
-            </p>
           </div>
 
-        </div>
 
         {/* Bottom Legal & Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">

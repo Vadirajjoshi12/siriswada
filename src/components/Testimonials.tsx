@@ -483,9 +483,9 @@ setReviews(prev => [newReview, ...prev]);
                       <span className="text-[11px] text-neutral-400 font-medium">{item.date}</span>
                     </div>
 
-                    <p className="text-neutral-800 text-sm sm:text-base leading-relaxed italic">
-                      "{item.commentText}"
-                    </p>
+                   <p className="text-neutral-800 text-sm sm:text-base leading-relaxed italic">
+                    "{item.comment}"
+                  </p>
                   </div>
 
                   <div className="mt-6 pt-5 border-t border-neutral-100 flex items-center justify-between gap-4">
