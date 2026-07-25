@@ -1,6 +1,7 @@
 import React from 'react';
 import instagramQrImg from '../assets/images/siriswada_jar_pack_1784833318192.jpg';
 import { Phone, Instagram, MapPin, Mail, ShieldCheck, Heart } from 'lucide-react';
+import logo from "../assets/images/logo.png";
 
 export const Footer: React.FC = () => {
   return (
@@ -11,19 +12,25 @@ export const Footer: React.FC = () => {
           
           {/* Col 1: Brand Info */}
           <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-600 to-amber-900 text-amber-100 flex items-center justify-center font-serif text-lg font-bold">
-                SS
-              </div>
-              <div>
-                <div className="font-semibold tracking-tight text-white text-base leading-tight font-sans">
-                  SIRISWADA FOODS
-                </div>
-                <div className="text-[11px] text-amber-400 font-medium tracking-wider uppercase">
-                  Taste the excellence
-                </div>
-              </div>
+                    <div className="flex items-center gap-4">
+          <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-lg">
+            <img
+              src={logo}
+              alt="Siriswada Foods Logo"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div>
+            <div className="font-bold tracking-tight text-white text-3xl leading-tight">
+              SIRISWADA FOODS
             </div>
+
+            <div className="text-lg text-amber-400 font-semibold tracking-wider uppercase">
+              Taste the Excellence
+            </div>
+          </div>
+        </div>
 
             <p className="text-xs text-neutral-400 leading-relaxed">
               Premium Nut & Superseed Energy Blend handcrafted with 12 nutrient-dense superfoods for complete family wellness.
@@ -44,7 +51,7 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-xs text-neutral-400">
               <li><a href="#overview" className="hover:text-white transition-colors">Why Siriswada</a></li>
-              <li><a href="#ingredients" className="hover:text-white transition-colors">12 Super Ingredients</a></li>
+              <li><a href="#ingredients" className="hover:text-white transition-colors">11 Super Ingredients</a></li>
               <li><a href="#benefits" className="hover:text-white transition-colors">Health Benefits</a></li>
               <li><a href="#how-to-use" className="hover:text-white transition-colors">Preparation Guide</a></li>
               <li><a href="#shop" className="hover:text-white transition-colors">Shop Packs</a></li>
