@@ -16,6 +16,7 @@ import { ComingSoon } from "./components/comingsoon";
 import { Routes, Route } from "react-router-dom";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import { AboutFounder } from "./components/AboutFounder";
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
@@ -111,6 +112,8 @@ export default function App() {
             <FAQSection />
 
             <StorageInfo />
+            
+            <AboutFounder />
           </main>
 
           {/* Cart Drawer */}
