@@ -13,6 +13,9 @@ import { Footer } from './components/Footer';
 import { CartItem, ProductPack } from './types';
 import { StorageInfo } from "./components/StorageInfo";
 import { ComingSoon } from "./components/comingsoon";
+import { Routes, Route } from "react-router-dom";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
@@ -65,52 +68,80 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 text-neutral-900 font-sans selection:bg-amber-200 selection:text-amber-950">
-      
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-neutral-900 text-white text-xs font-semibold shadow-2xl border border-neutral-700 animate-bounce">
-          {toastMessage}
+  <Routes>
+
+    {/* ================= HOME PAGE ================= */}
+    <Route
+      path="/"
+      element={
+        <div className="min-h-screen bg-stone-50 text-neutral-900 font-sans selection:bg-amber-200 selection:text-amber-950">
+
+          {/* Toast Notification */}
+          {toastMessage && (
+            <div className="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-neutral-900 text-white text-xs font-semibold shadow-2xl border border-neutral-700 animate-bounce">
+              {toastMessage}
+            </div>
+          )}
+
+          {/* Navigation */}
+          <Navbar
+            cartCount={cartCount}
+            onOpenCart={() => setIsCartOpen(true)}
+            onNavigate={handleNavigate}
+          />
+
+          {/* Main Content */}
+          <main>
+            <Hero onNavigate={handleNavigate} />
+
+            <KeyHighlights />
+
+            <IngredientsSection />
+
+            <HealthBenefits />
+
+            <HowToUse />
+
+            <ShopSection onAddToCart={handleAddToCart} />
+
+            <ComingSoon />
+
+            <Testimonials />
+
+            <FAQSection />
+
+            <StorageInfo />
+          </main>
+
+          {/* Cart Drawer */}
+          <CartDrawer
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+            cart={cart}
+            onUpdateQuantity={handleUpdateQuantity}
+            onRemoveItem={handleRemoveItem}
+            onClearCart={handleClearCart}
+          />
+
+          {/* Footer */}
+          <Footer />
+
         </div>
-      )}
+      }
+    />
 
-      {/* Navigation */}
-      <Navbar 
-        cartCount={cartCount} 
-        onOpenCart={() => setIsCartOpen(true)}
-        onNavigate={handleNavigate}
-      />
+    {/* ================= ADMIN LOGIN ================= */}
+    <Route
+      path="/admin"
+      element={<AdminLogin />}
+    />
 
-      {/* Main Content Sections */}
-      <main>
-        <Hero onNavigate={handleNavigate} />
-        <KeyHighlights />
-        <IngredientsSection />
-        <HealthBenefits />
-        <HowToUse />
-        <ShopSection onAddToCart={handleAddToCart} />
+    {/* ================= ADMIN DASHBOARD ================= */}
+    <Route
+      path="/dashboard"
+      element={<AdminDashboard />}
+    />
 
-        <ComingSoon />
-
-        <Testimonials />
-
-        <FAQSection />
-
-        <StorageInfo />
-      </main>
-
-      {/* Cart Drawer */}
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cart={cart}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
-        onClearCart={handleClearCart}
-      />
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </Routes>
   );
 }

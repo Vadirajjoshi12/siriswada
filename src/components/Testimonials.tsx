@@ -15,7 +15,7 @@ export interface UserReview {
   name: string;
   roleLocation: string;
   rating: number;
-  comment: string;
+  commentText: string;
   tag: 'Family' | 'Fitness' | 'Senior' | 'Kids';
   verified: boolean;
   date: string;
@@ -23,7 +23,7 @@ export interface UserReview {
 
 
 export const Testimonials: React.FC = () => {
-  const [reviews, setReviews] = useState<UserReview[]>([]);
+  const [submitting, setSubmitting] = useState(false);
   const [filterTag, setFilterTag] = useState<string>('All');
   
   // Form state
@@ -33,9 +33,10 @@ export const Testimonials: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [roleLocation, setRoleLocation] = useState<string>('');
   const [tag, setTag] = useState<'Family' | 'Fitness' | 'Senior' | 'Kids'>('Family');
-  const [comment, setComment] = useState<string>('');
+  const [commentText, setcommentText] = useState<string>('');
   const [isVerified, setIsVerified] = useState<boolean>(true);
   const [submittedSuccess, setSubmittedSuccess] = useState<boolean>(false);
+  const [reviews, setReviews] = useState<UserReview[]>([]);
 
   // Load reviews from local storage on initial mount
   useEffect(() => {
@@ -68,15 +69,81 @@ loadReviews();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !comment.trim()) return;
+  e.preventDefault();
+  if (submitting) return;
+  setSubmitting(true);
+  const userName = name.trim();
+  const reviewText = commentText.trim();
+  if (reviewText.length < 10) {
+      alert("Review must contain at least 10 characters.");
+      return;
+    }
 
+    if (reviewText.length > 500) {
+      alert("Review cannot exceed 500 characters.");
+      return;
+    }
+    if (userName.length < 2) {
+      alert("Name must be at least 2 characters.");
+      return;
+    }
+
+    if (userName.length > 50) {
+      alert("Name cannot exceed 50 characters.");
+      return;
+    }
+
+    const nameRegex = /^[A-Za-z0-9 .'-]+$/;
+
+    if (!nameRegex.test(userName)) {
+      alert("Please enter a valid name.");
+      return;
+    }
+    if (!userName || !reviewText) {
+
+    setSubmitting(false);
+
+    return;
+
+  }
+    const lastReviewTime = Number(
+  localStorage.getItem("lastReviewTime")
+);
+
+if (
+  lastReviewTime &&
+  Date.now() - lastReviewTime < 5 * 60 * 1000
+) {
+  alert("Please wait 5 minutes before submitting another review.");
+  setSubmitting(false);
+  return;
+}
+        const duplicate = reviews.some(
+    (review)=>
+
+    review.name.toLowerCase()===userName.toLowerCase()
+
+    &&
+
+    review.commentText.toLowerCase()===reviewText.toLowerCase()
+
+    );
+
+    if(duplicate){
+
+    alert("You've already submitted this review.");
+
+    setSubmitting(false);
+
+    return;
+
+    }
     const newReview: UserReview = {
       id: Date.now().toString(),
-      name: name.trim(),
+      name: userName,
       roleLocation: roleLocation.trim() || 'Verified Customer',
       rating,
-      comment: comment.trim(),
+      commentText: reviewText,
       tag,
       verified: isVerified,
       date: new Date().toLocaleDateString('en-IN', {
@@ -86,34 +153,55 @@ loadReviews();
       })
     };
 
-   await addDoc(collection(db,"reviews"),{
+   try {
 
-   name:newReview.name,
+  await addDoc(collection(db, "reviews"), {
 
-   roleLocation:newReview.roleLocation,
+    name: newReview.name,
 
-   rating:newReview.rating,
+    roleLocation: newReview.roleLocation,
 
-   comment:newReview.comment,
+    rating: newReview.rating,
 
-   tag:newReview.tag,
+    commentText: newReview.commentText,
 
-   verified:newReview.verified,
+    tag: newReview.tag,
 
-   date:newReview.date,
+    verified: newReview.verified,
 
-   timestamp:Date.now()
+    date: newReview.date,
 
-});
+    timestamp: Date.now()
 
-setReviews([newReview,...reviews]);
+  });
+
+
+}
+catch (error) {
+
+  console.error(error);
+
+  alert("Something went wrong while submitting your review.");
+
+  setSubmitting(false);
+
+  return;
+
+}
+localStorage.setItem(
+"lastReviewTime",
+Date.now().toString()
+);
+
+setReviews(prev => [newReview, ...prev]);
 
     // Reset form
     setName('');
     setRoleLocation('');
-    setComment('');
+    setcommentText('');
     setRating(5);
     setSubmittedSuccess(true);
+    setSubmitting(false);
 
     setTimeout(() => {
       setSubmittedSuccess(false);
@@ -311,8 +399,8 @@ setReviews([newReview,...reviews]);
                   <textarea
                     required
                     rows={4}
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+                    value={commentText}
+                    onChange={(e) => setcommentText(e.target.value)}
                     placeholder="Tell us how Siriswada Nutrimix tasted, how you mixed it (with milk, smoothies, porridge), and its effect on your daily energy..."
                     className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:ring-2 focus:ring-neutral-900 focus:outline-hidden text-sm"
                   ></textarea>
@@ -328,9 +416,10 @@ setReviews([newReview,...reviews]);
                   </button>
                   <button
                     type="submit"
+                    disabled={submitting}
                     className="px-6 py-2.5 rounded-full bg-neutral-900 text-white text-xs font-semibold hover:bg-neutral-800 transition-all shadow-md cursor-pointer"
                   >
-                    Submit Review
+                    {submitting ? "Submitting..." : "Submit Review"}
                   </button>
                 </div>
               </form>
@@ -395,7 +484,7 @@ setReviews([newReview,...reviews]);
                     </div>
 
                     <p className="text-neutral-800 text-sm sm:text-base leading-relaxed italic">
-                      "{item.comment}"
+                      "{item.commentText}"
                     </p>
                   </div>
 
