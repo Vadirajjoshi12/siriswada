@@ -5,7 +5,7 @@ import { db } from "../firebase";
 import {
 collection,
 addDoc,
-getDocs,
+onSnapshot,
 orderBy,
 query
 } from "firebase/firestore";
@@ -39,27 +39,25 @@ export const Testimonials: React.FC = () => {
   const [reviews, setReviews] = useState<UserReview[]>([]);
 
   // Load reviews from local storage on initial mount
-  useEffect(() => {
+useEffect(() => {
 
-const loadReviews = async () => {
+  const q = query(
+    collection(db, "reviews"),
+    orderBy("timestamp", "desc")
+  );
 
-const q = query(
-collection(db,"reviews"),
-orderBy("timestamp","desc")
-);
+  const unsubscribe = onSnapshot(q, (snapshot) => {
 
-const snapshot = await getDocs(q);
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as UserReview[];
 
-const data = snapshot.docs.map(doc => ({
-id: doc.id,
-...doc.data()
-})) as UserReview[];
+    setReviews(data);
 
-setReviews(data);
+  });
 
-};
-
-loadReviews();
+  return () => unsubscribe();
 
 }, []);
 
