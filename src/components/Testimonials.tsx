@@ -48,10 +48,13 @@ useEffect(() => {
 
   const unsubscribe = onSnapshot(q, (snapshot) => {
 
-    const data = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as UserReview[];
+    const data = snapshot.docs.map(doc => {
+  console.log(doc.data());   // 👈 Add this
+  return {
+    id: doc.id,
+    ...doc.data()
+  };
+}) as UserReview[];
 
     setReviews(data);
 
@@ -175,23 +178,16 @@ if (
 
 
 }
-catch (error) {
-
+catch (error: any) {
   console.error(error);
-
-  alert("Something went wrong while submitting your review.");
-
-  setSubmitting(false);
-
-  return;
-
+  alert(error.message);
 }
 localStorage.setItem(
 "lastReviewTime",
 Date.now().toString()
 );
 
-setReviews(prev => [newReview, ...prev]);
+
 
     // Reset form
     setName('');
@@ -482,7 +478,9 @@ setReviews(prev => [newReview, ...prev]);
                     </div>
 
                    <p className="text-neutral-800 text-sm sm:text-base leading-relaxed italic">
-                    "{item.comment}"
+                    <p className="text-neutral-800 text-sm sm:text-base leading-relaxed italic">
+                    {item.commentText}
+                  </p>
                   </p>
                   </div>
 
